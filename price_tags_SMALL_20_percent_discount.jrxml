@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="test10" language="groovy" columnCount="5" printOrder="Horizontal" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="110" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="17f8549d-d094-4b29-ab8b-ceb27f3cb98e">
+	<property name="ireport.zoom" value="1.610510000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<style name="default_font" fontName="DejaVu Sans" fontSize="6" pdfEncoding="Cp1251"/>
+	<field name="bar_type" class="java.lang.String"/>
+	<field name="bar_code" class="java.lang.String"/>
+	<field name="item_name" class="java.lang.String"/>
+	<field name="price_name" class="java.lang.String"/>
+	<field name="price_value" class="java.lang.String"/>
+	<field name="purchase_date" class="java.lang.String"/>
+	<field name="manufacturer_name" class="java.lang.String"/>
+	<field name="purchase_closed" class="java.lang.String"/>
+	<field name="unit_name" class="java.lang.String"/>
+	<field name="subject_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="raw_price_value" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[new BigDecimal($F{price_value}.replace(" руб.", ""))]]></variableExpression>
+	</variable>
+	<variable name="rounded_price_value" class="java.lang.String">
+		<variableExpression><![CDATA[$V{raw_price_value}.setScale(0, BigDecimal.ROUND_DOWN).toString() + " руб."]]></variableExpression>
+	</variable>
+	<variable name="discount_value" class="java.lang.String">
+		<variableExpression><![CDATA[$V{raw_price_value}.multiply(0.8).setScale(0, BigDecimal.ROUND_HALF_UP).toString() + " руб."]]></variableExpression>
+	</variable>
+	<detail>
+		<band height="70" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[$F{bar_type}.equals("EAN13") && $F{bar_code} != null]]></printWhenExpression>
+			<rectangle>
+				<reportElement style="default_font" positionType="Float" x="0" y="0" width="110" height="70" uuid="cdb387f1-a849-4cb0-9766-8bfd6a67a58d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.25" lineStyle="Dashed"/>
+				</graphicElement>
+			</rectangle>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="default_font" positionType="FixRelativeToBottom" x="0" y="0" width="55" height="10" uuid="5031b312-b237-4fb5-864d-a9c08b74f382">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="4" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{subject_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement style="default_font" positionType="Float" x="55" y="0" width="55" height="10" uuid="388dde43-a8fc-4b6c-b59a-e750d850e613">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="5" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="default_font" positionType="Float" x="0" y="10" width="110" height="25" uuid="3ef00ae7-c427-4297-8315-25bba34551a0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="6" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{item_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="default_font" positionType="Float" x="0" y="30" width="110" height="11" isRemoveLineWhenBlank="true" uuid="796ee5c2-f34b-49bc-b5eb-d285c05daa40"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="6" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unit_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="default_font" x="0" y="36" width="110" height="16" uuid="de4bf929-d1fd-41a8-8c19-b01196453ef3">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="12" isPdfEmbedded="true" isStrikeThrough="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{rounded_price_value}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="default_font" x="0" y="40" width="110" height="30" uuid="3ac639f4-c925-11ea-9e37-ab7fe196a892">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="17" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{discount_value}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="70">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[$F{bar_type}.equals("EAN8") && $F{bar_code} != null]]></printWhenExpression>
+			<rectangle>
+				<reportElement style="default_font" positionType="Float" x="0" y="0" width="110" height="70" uuid="db510657-5438-40a2-962d-651a1488fc39">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.25" lineStyle="Dashed"/>
+				</graphicElement>
+			</rectangle>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="default_font" x="0" y="36" width="110" height="16" uuid="fb2f9a96-154f-43c0-9c8a-f869c54998d7">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="12" isPdfEmbedded="true" isStrikeThrough="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{rounded_price_value}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="default_font" x="0" y="40" width="110" height="30" uuid="e948dfda-c92b-11ea-b567-2f8c3354af8d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="17" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{discount_value}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement style="default_font" positionType="Float" x="55" y="0" width="55" height="10" uuid="f124fd2c-486f-444f-a00c-3b159a67eee6">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="5" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="default_font" positionType="Float" x="0" y="10" width="110" height="25" uuid="c030b66c-bb53-47b6-b518-26f0cfdee9c6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="6" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{item_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="default_font" positionType="Float" x="0" y="30" width="110" height="11" isRemoveLineWhenBlank="true" uuid="9da63267-21b4-45e3-9777-98c98c6df31f"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="6" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unit_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="default_font" positionType="FixRelativeToBottom" x="0" y="0" width="55" height="10" uuid="2aaf0ea1-23c0-43fb-8ffb-27d0806bcb64">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="4" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{subject_name}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="70">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[$F{bar_type}.equals("EAN12") && $F{bar_code} != null]]></printWhenExpression>
+			<rectangle>
+				<reportElement style="default_font" positionType="Float" x="0" y="0" width="110" height="70" uuid="d4c8aebb-c4fc-4bf4-bc83-6936cda0ec16">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.25" lineStyle="Dashed"/>
+				</graphicElement>
+			</rectangle>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="default_font" positionType="FixRelativeToBottom" x="0" y="0" width="55" height="10" uuid="8918d896-2fa0-4808-90bd-3a373f309476">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="4" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{subject_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement style="default_font" positionType="Float" x="55" y="0" width="55" height="10" uuid="6d99d62f-03a3-410b-aedd-68926c6da3b3">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="5" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="default_font" positionType="Float" x="0" y="10" width="110" height="25" uuid="dbac8f52-7968-44e9-984c-13bc5a0710ec">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="6" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{item_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="default_font" positionType="Float" x="0" y="30" width="110" height="11" isRemoveLineWhenBlank="true" uuid="bf21b5d4-a000-467c-90af-48c75d6d8c43"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="6" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unit_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="default_font" x="0" y="36" width="110" height="16" uuid="0e80c7dd-d3a3-4368-9078-4bceeb881ea2">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="12" isPdfEmbedded="true" isStrikeThrough="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{rounded_price_value}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="default_font" x="0" y="40" width="110" height="30" uuid="fba4b884-c92b-11ea-bf32-d390bc8dbbe4">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="17" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{discount_value}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="70">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[$F{bar_type}.equals("NONE") && $F{bar_code} != null]]></printWhenExpression>
+			<rectangle>
+				<reportElement style="default_font" positionType="Float" x="0" y="0" width="110" height="70" uuid="dd5ac80f-6232-4a28-9ebc-58e34fbfbf00">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.25" lineStyle="Dashed"/>
+				</graphicElement>
+			</rectangle>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="default_font" positionType="FixRelativeToBottom" x="0" y="0" width="55" height="10" uuid="0284037e-6906-4848-ac73-da54057294ee">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="4" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{subject_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement style="default_font" positionType="Float" x="55" y="0" width="55" height="10" uuid="bc436397-14a9-4982-b9e3-37087ab406dd">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="5" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="" style="default_font" positionType="Float" x="0" y="10" width="110" height="25" uuid="8a5951bf-7fc9-4a49-9899-555cac299a40">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="6" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{item_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="default_font" positionType="Float" x="0" y="30" width="110" height="11" isRemoveLineWhenBlank="true" uuid="4bc5d085-17bc-4788-b240-46a2fa9c8984"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="6" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unit_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="default_font" x="0" y="36" width="110" height="16" uuid="2593c7d3-5007-4b5e-99d9-38ffd65d8f60">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="12" isPdfEmbedded="true" isStrikeThrough="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{rounded_price_value}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="default_font" x="0" y="40" width="110" height="30" uuid="0b39508e-c92c-11ea-9d93-af3f7878fbfc">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="17" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{discount_value}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
